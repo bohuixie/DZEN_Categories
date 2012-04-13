@@ -50,7 +50,7 @@
     self.layer.masksToBounds = NO;
 }
 
-- (void)createCurlShadowWithOffset:(CGSize)offset withOpacity:(CGFloat)opacity andRadius:(CGFloat)radius
+- (void)createCurlShadowWithAngle:(CGFloat)angle withOffset:(CGSize)offset withOpacity:(CGFloat)opacity andRadius:(CGFloat)radius
 {
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOpacity = opacity;
@@ -59,7 +59,6 @@
     self.layer.masksToBounds = NO;
     
 	CGSize size = self.bounds.size;
-	CGFloat curlFactor = 15.0f;
 	CGFloat shadowDepth = 5.0f;
     
 	UIBezierPath *path = [UIBezierPath bezierPath];
@@ -67,8 +66,8 @@
 	[path addLineToPoint:CGPointMake(size.width, 0.0f)];
 	[path addLineToPoint:CGPointMake(size.width, size.height + shadowDepth)];
 	[path addCurveToPoint:CGPointMake(0.0f, size.height + shadowDepth)
-			controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
-			controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
+			controlPoint1:CGPointMake(size.width - angle, size.height + shadowDepth - angle)
+			controlPoint2:CGPointMake(angle, size.height + shadowDepth - angle)];
     
 	self.layer.shadowPath = path.CGPath;
 }

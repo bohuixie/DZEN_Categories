@@ -19,6 +19,7 @@
 + (NSString *)fulldayStringFromDate:(NSDate *)date;
 + (NSString *)monthStringFromDate:(NSDate *)date;
 + (NSString *)longStringFromDate:(NSDate *)date;
+//+ (NSString *)longLatinStringFromDate:(NSDate *)date;
 + (NSString *)shortStringFromDate:(NSDate *)date;
 + (NSString *)shortStringFromDateWithTime:(NSDate *)date;
 + (NSString *)smartStringFromDate:(NSDate *)date withFormat:(NSString *)format;

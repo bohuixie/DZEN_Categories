@@ -29,6 +29,17 @@
     else if ([origin isEqualToString:@"documents"]) originPath = [NSString getDocumentsDirectoryForFile:fileName];
     else if ([origin isEqualToString:@"library"]) originPath = [NSString getLibraryDirectoryForFile:fileName];
     
+    /*Check if folder exist, if not, create automatically
+    if (folderName.length > 0)
+    {
+        NSString *folderPath = [NSString stringWithFormat:@"%@/%@",destination,folderName];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath])
+        {
+            [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:nil];
+        }
+    }
+    */
+    
     NSString *destinationPath;
     if ([destination isEqualToString:@"documents"]) destinationPath = [NSString getDocumentsDirectoryForFile:[NSString stringWithFormat:@"%@/%@",folderName,fileName]];
     else if ([destination isEqualToString:@"library"]) destinationPath = [NSString getLibraryDirectoryForFile:[NSString stringWithFormat:@"%@/%@",folderName,fileName]];
@@ -96,11 +107,13 @@
     [loadedPlist writeToFile:path atomically:NO];
 }
 
+
 - (BOOL)isRetina
 {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
         ([UIScreen mainScreen].scale == 2.0)) return YES;
     else return NO;
 }
+
 
 @end

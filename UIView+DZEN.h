@@ -18,6 +18,6 @@
 
 //Shadows
 - (void)createRectShadowWithOffset:(CGSize)offset withOpacity:(CGFloat)opacity andRadius:(CGFloat)radius;
-- (void)createCurlShadowWithOffset:(CGSize)offset withOpacity:(CGFloat)opacity andRadius:(CGFloat)radius;
+- (void)createCurlShadowWithAngle:(CGFloat)angle withOffset:(CGSize)offset withOpacity:(CGFloat)opacity andRadius:(CGFloat)radius;
 
 @end

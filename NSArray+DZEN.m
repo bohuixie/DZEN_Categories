@@ -5,27 +5,20 @@
 
 #import "NSArray+DZEN.h"
 
-@implementation NSArray (DZEN)
+@implementation NSArray (DZEN) 
 
-- (id)safeObjectAtIndex:(NSUInteger)index
-{
-    return [self objectAtIndex:index];
-}
-
-/*
 -(id)safeObjectAtIndex:(NSUInteger)index
 {
-    assert(index < [self count]);
+    return [self objectAtIndex:index];
     
     @try {
         return [self objectAtIndex:index];
     } 
     @catch (id theException) {
-        NSLog(@"safeObjectAtIndex exception: %@", theException);
+        NSLog(@"*** safeObjectAtIndex exception: %@", theException);
         return nil;
     }
 }
-*/
 
 - (NSArray *)reversedArray
 {

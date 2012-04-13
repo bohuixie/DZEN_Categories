@@ -47,8 +47,11 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEE"];
+    
     NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [dateFormatter setLocale:usLocale];
+    //[dateFormatter setLocale:[NSLocale systemLocale]];
+    
     return [dateFormatter stringFromDate:date];
 }
 
@@ -57,8 +60,11 @@
     if (!date) return @"";
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
     NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [dateFormatter setLocale:usLocale];
+    //[dateFormatter setLocale:[NSLocale systemLocale]];
+    
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
     int weekday = [comps weekday]-1;
@@ -73,8 +79,10 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    
     NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [dateFormatter setLocale:usLocale];
+    //[dateFormatter setLocale:[NSLocale systemLocale]];
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:date];
     NSInteger year = [components year];    
@@ -93,8 +101,11 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    
     NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [dateFormatter setLocale:usLocale];
+    //[dateFormatter setLocale:[NSLocale systemLocale]];
+    
     return [dateFormatter stringFromDate:date];
 }
 
@@ -102,18 +113,28 @@
 {
     if (!date) return @"";
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    return [dateFormat stringFromDate:date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 + (NSString *)shortStringFromDateWithTime:(NSDate *)date
 {
     if (!date) return @"";
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //[dateFormatter setDateFormat:@"dd/MM/yyyy 'at' HH:mm"];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy 'at' HH:mm"];
-    return [dateFormat stringFromDate:date];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 + (NSString *)smartStringFromDate:(NSDate *)date withFormat:(NSString *)format

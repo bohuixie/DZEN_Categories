@@ -8,7 +8,11 @@
 
 @interface UIWebView (DZEN)
 
-- (CGFloat)contentHeight;
+- (float)contentHeight;
+- (CGSize)windowSize;
+- (CGPoint)scrollOffset;
 
+- (void)removeInput;
+- (void)removeBackgroundShadow;
 
 @end
