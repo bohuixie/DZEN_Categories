@@ -427,8 +427,6 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     CGSize size = self.size;
     CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
     
-    NSLog(@"imageToGrayscale to size = %@",NSStringFromCGSize(self.size));
-    
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray(); 
     CGContextRef context = CGBitmapContextCreate(nil, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaNone); 
     CGColorSpaceRelease(colorSpace); 

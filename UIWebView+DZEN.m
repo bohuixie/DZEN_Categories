@@ -56,25 +56,38 @@
     {
         if ([checkView.gestureRecognizers count] > 0)
         {
-            checkView.userInteractionEnabled = NO;
+            //checkView.userInteractionEnabled = NO;
             
+            NSLog(@"checkView = %@",NSStringFromClass([checkView class]));
+            NSLog(@"checkView has %d gestures",[checkView.gestureRecognizers count]);
+            
+            NSMutableArray *gestures = [[NSMutableArray alloc] init];
+            for (UIGestureRecognizer *gesture in checkView.gestureRecognizers)
+            {
+                if ([gesture isKindOfClass:[UITapGestureRecognizer class]])
+                {
+                    NSLog(@"FOUND TAP GESTURE");
+                    [gestures addObject:gesture];
+                }
+                else
+                {
+                    NSLog(@"FOUND GESTURE : %@",NSStringFromClass([gesture class]));
+                }
+                
+                /*
+                if ([gesture isKindOfClass:[UITapGestureRecognizer class]])
+                {
+                    [gestures addObject:gesture];
+                }
+                 */
+            }
             
             /*
-             NSLog(@"checkView = %@",NSStringFromClass([checkView class]));
-             NSLog(@"checkView has %d gestures",[checkView.gestureRecognizers count]);
-             
-             NSMutableArray *gestures = [[NSMutableArray alloc] init];
-             for (UIGestureRecognizer *gesture in checkView.gestureRecognizers)
-             {
-             if ([gesture isKindOfClass:[UITapGestureRecognizer class]])
-             {
-             [gestures addObject:gesture];
-             }
-             }
-             
-             checkView.gestureRecognizers = nil;
-             NSLog(@"checkView gestures : %@\n\n",checkView.gestureRecognizers);
+            checkView.gestureRecognizers = nil;
+            NSLog(@"checkView gestures : %@\n\n",checkView.gestureRecognizers);
              */
+            
+            NSLog(@"\n\ngestures = %@",gestures);
         }
     }
 }

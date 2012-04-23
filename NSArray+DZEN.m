@@ -20,6 +20,26 @@
     }
 }
 
+- (id)objectSortedByKey:(NSString *)key atIndex:(NSUInteger)index
+{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [self sortedArrayUsingDescriptors:sortDescriptors];
+
+    return [sortedArray objectAtIndex:index];
+}
+
+/*
+- (id)objectSortedByPosition:(NSString *)key atIndex:(NSUInteger)index
+{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [self sortedArrayUsingDescriptors:sortDescriptors];
+    
+    return [sortedArray objectAtIndex:index];
+}
+ */
+
 - (NSArray *)reversedArray
 {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];

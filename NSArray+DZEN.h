@@ -8,6 +8,8 @@
 @interface NSArray (DZEN) 
 
 - (id)safeObjectAtIndex:(NSUInteger)index;
+- (id)objectSortedByKey:(NSString *)key atIndex:(NSUInteger)index;
+
 - (NSArray *)reversedArray;
 
 - (void)saveArrayToFile:(NSString *)filename;
