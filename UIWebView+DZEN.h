@@ -3,8 +3,8 @@
 //  Copyright (c) 2012 DZen Interaktiv. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-
 
 @interface UIWebView (DZEN)
 
@@ -12,7 +12,7 @@
 - (CGSize)windowSize;
 - (CGPoint)scrollOffset;
 
-- (void)removeInput;
+- (void)enableInput:(BOOL)enable;
 - (void)removeBackgroundShadow;
 
 @end
