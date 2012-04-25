@@ -116,4 +116,11 @@
 }
 
 
+- (BOOL)isIOS5
+{
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5) return true;
+    else return false;
+}
+
+
 @end

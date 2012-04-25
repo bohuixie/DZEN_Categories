@@ -12,7 +12,9 @@
 - (CGSize)windowSize;
 - (CGPoint)scrollOffset;
 
-- (void)enableInput:(BOOL)enable;
 - (void)removeBackgroundShadow;
+
+- (void)enableInput:(BOOL)enable;
+- (void)enableUserSelection:(BOOL)enable;
 
 @end

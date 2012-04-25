@@ -65,4 +65,17 @@
     }
 }
 
+- (void)enableUserSelection:(BOOL)enable
+{
+    NSString *value;
+    if (enable) value = @"auto";
+    else value = @"none";
+    
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkitTouchCallout='%@';",value]];
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkit-touch-callout='%@';",value]];
+    
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkitUserSelect='%@';",value]];
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkit-user-select='%@';",value]];
+}
+
 @end
