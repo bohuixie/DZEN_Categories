@@ -48,8 +48,7 @@
         if ([checkView isKindOfClass:[UIScrollView class]])
         {
             webViewContentView = (UIScrollView *)checkView;
-            [webViewContentView setScrollEnabled:!enable];
-            NSLog(@"setScrollEnabled = %@\n", (!enable ? @"YES" : @"NO"));
+            [webViewContentView setScrollEnabled:enable];
             break;
         }
     }
@@ -58,9 +57,10 @@
     {
         if ([checkView.gestureRecognizers count] > 0)
         {
-            checkView.userInteractionEnabled = !enable;
+            checkView.userInteractionEnabled = enable;
             
-            NSLog(@"checkView setUserInteractionEnabled = %@\n", (!enable ? @"YES" : @"NO"));
+            for (UIGestureRecognizer *gesture in checkView.gestureRecognizers)
+                gesture.enabled = enable;
         }
     }
 }
