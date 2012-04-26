@@ -22,11 +22,14 @@
 
 - (id)objectSortedByKey:(NSString *)key atIndex:(NSUInteger)index
 {
+    return [[self sortByKey:key] objectAtIndex: index];
+}
+
+- (NSArray *)sortByKey:(NSString *)key
+{
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *sortedArray = [self sortedArrayUsingDescriptors:sortDescriptors];
-
-    return [sortedArray objectAtIndex:index];
+    return [self sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 /*
