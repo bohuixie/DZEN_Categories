@@ -40,7 +40,7 @@
     }
 }
 
-- (void)removeInput
+- (void)enableInput:(BOOL)enable;
 {
     UIScrollView *webViewContentView;
     for (UIView *checkView in [self subviews])
@@ -48,6 +48,7 @@
         if ([checkView isKindOfClass:[UIScrollView class]])
         {
             webViewContentView = (UIScrollView *)checkView;
+            [webViewContentView setScrollEnabled:enable];
             break;
         }
     }
@@ -56,40 +57,25 @@
     {
         if ([checkView.gestureRecognizers count] > 0)
         {
-            //checkView.userInteractionEnabled = NO;
+            checkView.userInteractionEnabled = enable;
             
-            NSLog(@"checkView = %@",NSStringFromClass([checkView class]));
-            NSLog(@"checkView has %d gestures",[checkView.gestureRecognizers count]);
-            
-            NSMutableArray *gestures = [[NSMutableArray alloc] init];
             for (UIGestureRecognizer *gesture in checkView.gestureRecognizers)
-            {
-                if ([gesture isKindOfClass:[UITapGestureRecognizer class]])
-                {
-                    NSLog(@"FOUND TAP GESTURE");
-                    [gestures addObject:gesture];
-                }
-                else
-                {
-                    NSLog(@"FOUND GESTURE : %@",NSStringFromClass([gesture class]));
-                }
-                
-                /*
-                if ([gesture isKindOfClass:[UITapGestureRecognizer class]])
-                {
-                    [gestures addObject:gesture];
-                }
-                 */
-            }
-            
-            /*
-            checkView.gestureRecognizers = nil;
-            NSLog(@"checkView gestures : %@\n\n",checkView.gestureRecognizers);
-             */
-            
-            NSLog(@"\n\ngestures = %@",gestures);
+                gesture.enabled = enable;
         }
     }
+}
+
+- (void)enableUserSelection:(BOOL)enable
+{
+    NSString *value;
+    if (enable) value = @"auto";
+    else value = @"none";
+    
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkitTouchCallout='%@';",value]];
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkit-touch-callout='%@';",value]];
+    
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkitUserSelect='%@';",value]];
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.body.style.webkit-user-select='%@';",value]];
 }
 
 @end

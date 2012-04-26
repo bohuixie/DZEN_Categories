@@ -16,5 +16,6 @@
 - (void)setSettings:(NSString *)settings Object:(id)value forKey:(NSString *)objKey;
 
 - (BOOL)isRetina;
+- (BOOL)isIOS5;
 
 @end

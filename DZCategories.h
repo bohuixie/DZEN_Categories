@@ -4,6 +4,7 @@
 //
 
 #import "NSArray+DZEN.h"
+#import "UIColor+DZEN.h"
 #import "NSDate+DZEN.h"
 #import "NSMutableArray+DZEN.h"
 #import "NSObject+DZEN.h"
