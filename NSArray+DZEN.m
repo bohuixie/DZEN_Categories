@@ -5,7 +5,27 @@
 
 #import "NSArray+DZEN.h"
 
-@implementation NSArray (DZEN) 
+@implementation NSArray (DZEN)
+
+- (id)initWithDictionaries:(NSArray *)anotherArray forKey:(NSString *)key
+{
+    self = [super init];
+    if (self)
+    {
+        NSMutableArray *result = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < [anotherArray count]; i++)
+        {
+            NSDictionary *dict = [anotherArray objectAtIndex:i];
+            
+            id object = [dict objectForKey:key];
+            if (object) [result addObject:object];
+        }
+        
+        return (NSArray *)result;
+    }
+    return self;
+}
 
 -(id)safeObjectAtIndex:(NSUInteger)index
 {
@@ -48,10 +68,8 @@
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
     NSEnumerator *enumerator = [self reverseObjectEnumerator];
     
-    for (id element in enumerator)
-    {
-        [array addObject:element];
-    }
+    for (id element in enumerator) [array addObject:element];
+
     return array;
 }
 

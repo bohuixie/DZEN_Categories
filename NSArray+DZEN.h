@@ -7,6 +7,8 @@
 
 @interface NSArray (DZEN) 
 
+- (id)initWithDictionaries:(NSArray *)anotherArray forKey:(NSString *)key;
+
 - (id)safeObjectAtIndex:(NSUInteger)index;
 - (NSArray *)sortByKey:(NSString *)key;
 - (id)objectSortedByKey:(NSString *)key atIndex:(NSUInteger)index;
