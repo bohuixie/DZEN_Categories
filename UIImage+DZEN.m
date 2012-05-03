@@ -114,14 +114,20 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return subImage;
 }
 
-- (UIImage *)imageByScalingProportionallyToMinimumSize:(CGSize)targetSize {
-    
+- (UIImage *)imageByScalingProportionallyToMinimumSize:(CGSize)targetSize 
+{
     UIImage *sourceImage = self;
     UIImage *newImage = nil;
     
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
+    
+    if ([self isRetina])
+    {
+        CGSize retinaTargetSize = CGSizeMake(targetSize.width*2, targetSize.height*2);
+        if (!CGSizeEqualToSize(imageSize, retinaTargetSize)) targetSize = retinaTargetSize;
+    }
     
     CGFloat targetWidth = targetSize.width;
     CGFloat targetHeight = targetSize.height;
@@ -132,8 +138,8 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     
     CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
     
-    if (CGSizeEqualToSize(imageSize, targetSize) == NO) {
-        
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         
@@ -145,18 +151,11 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
         
-        // center the image
-        
-        if (widthFactor > heightFactor) {
-            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5; 
-        } else if (widthFactor < heightFactor) {
-            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
-        }
+        if (widthFactor > heightFactor) thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5; 
+        else if (widthFactor < heightFactor) thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
     }
     
-    // this is actually the interesting part:
     UIGraphicsBeginImageContext(targetSize);
-    
     CGRect thumbnailRect = CGRectZero;
     thumbnailRect.origin = thumbnailPoint;
     thumbnailRect.size.width  = scaledWidth;
@@ -174,6 +173,12 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 
 - (UIImage *)imageByScalingProportionallyToMaximumSize:(CGSize)maxSize
 {
+    if ([self isRetina])
+    {
+        CGSize retinaMaxtSize = CGSizeMake(maxSize.width*2, maxSize.height*2);
+        if (!CGSizeEqualToSize(maxSize, retinaMaxtSize)) maxSize = retinaMaxtSize;
+    }
+
     if ((self.size.width > maxSize.width || maxSize.width == maxSize.height) && self.size.width > self.size.height)
     {
         float factor = (maxSize.width*100)/self.size.width;
@@ -217,14 +222,20 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 
-- (UIImage *)imageByScalingProportionallyToSize:(CGSize)targetSize {
-    
+- (UIImage *)imageByScalingProportionallyToSize:(CGSize)targetSize
+{
     UIImage *sourceImage = self;
     UIImage *newImage = nil;
     
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
+        
+    if ([self isRetina])
+    {
+        CGSize retinaTargetSize = CGSizeMake(targetSize.width*2, targetSize.height*2);
+        if (!CGSizeEqualToSize(imageSize, retinaTargetSize)) targetSize = retinaTargetSize;
+    }
     
     CGFloat targetWidth = targetSize.width;
     CGFloat targetHeight = targetSize.height;
@@ -235,29 +246,21 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     
     CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
     
-    if (CGSizeEqualToSize(imageSize, targetSize) == NO) {
-        
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         
-        if (widthFactor < heightFactor) 
-            scaleFactor = widthFactor;
-        else
-            scaleFactor = heightFactor;
+        if (widthFactor < heightFactor) scaleFactor = widthFactor;
+        else scaleFactor = heightFactor;
         
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
         
-        // center the image
-        
-        if (widthFactor < heightFactor) {
-            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5; 
-        } else if (widthFactor > heightFactor) {
-            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
-        }
+        if (widthFactor < heightFactor) thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5; 
+        else if (widthFactor > heightFactor) thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
     }
     
-    // this is actually the interesting part:
     UIGraphicsBeginImageContext(targetSize);
     
     CGRect thumbnailRect = CGRectZero;
@@ -271,30 +274,24 @@ static CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     UIGraphicsEndImageContext();
     
     if(newImage == nil) NSLog(@"could not scale image");
-    
+        
     return newImage ;
 }
 
 
-- (UIImage *)imageByScalingToSize:(CGSize)targetSize {
-    
+- (UIImage *)imageByScalingToSize:(CGSize)targetSize
+{
     UIImage *sourceImage = self;
     UIImage *newImage = nil;
-    
-    //   CGSize imageSize = sourceImage.size;
-    //   CGFloat width = imageSize.width;
-    //   CGFloat height = imageSize.height;
-    
+
     CGFloat targetWidth = targetSize.width;
     CGFloat targetHeight = targetSize.height;
     
-    //   CGFloat scaleFactor = 0.0;
     CGFloat scaledWidth = targetWidth;
     CGFloat scaledHeight = targetHeight;
     
     CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
     
-    // this is actually the interesting part:
     UIGraphicsBeginImageContext(targetSize);
     
     CGRect thumbnailRect = CGRectZero;
