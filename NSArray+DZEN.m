@@ -29,8 +29,12 @@
 
 -(id)safeObjectAtIndex:(NSUInteger)index
 {
-    return [self objectAtIndex:index];
+    //NSLog(@"safeObjectAtIndex: %d",index);
     
+    if ([self count] > 0) return [self objectAtIndex:index];
+    else return nil;
+    
+    /*
     @try {
         return [self objectAtIndex:index];
     } 
@@ -38,6 +42,7 @@
         NSLog(@"*** safeObjectAtIndex exception: %@", theException);
         return nil;
     }
+     */
 }
 
 - (id)objectSortedByKey:(NSString *)key atIndex:(NSUInteger)index
