@@ -1,6 +1,8 @@
 # DZEN Categories
 
-### Some Screenshots
+This are a set of Objective-C category methods I commonly use for most of my iOS projects. I found them very useful, and cleaner than subclassing, so I hope they help you out a bit and feel free to contribute!
+
+### Disclamer
 Some of this methods are creation of my own, others, well, are more like a copy paste from different useful solutions I have found searching in stackoverflow website. If by any chance you see something you made out, please let me know to give the credits.
 
 ## License
