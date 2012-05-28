@@ -7,6 +7,11 @@
 
 @implementation UIWebView (DZEN)
 
+- (float)zoomScale
+{
+    return self.scrollView.zoomScale;
+}
+
 - (float)contentHeight
 {
 	return [[self stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight + document.body.offsetTop;"] floatValue];

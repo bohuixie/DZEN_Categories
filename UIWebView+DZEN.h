@@ -8,6 +8,7 @@
 
 @interface UIWebView (DZEN)
 
+- (float)zoomScale;
 - (float)contentHeight;
 - (CGSize)windowSize;
 - (CGPoint)scrollOffset;
