@@ -25,6 +25,7 @@
 
 + (NSString *)detectDeviceModel;
 
+- (BOOL)isValidEmail;
 - (BOOL)isNumeric;
 
 @end

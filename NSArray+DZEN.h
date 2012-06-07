@@ -18,4 +18,6 @@
 - (void)saveArrayToFile:(NSString *)filename;
 + (NSArray *)loadArrayfromFile:(NSString *)fileName;
 
+- (NSArray *)removeAllObjects;
+
 @end

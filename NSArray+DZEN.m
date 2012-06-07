@@ -92,4 +92,11 @@
     return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 }
 
+- (NSArray *)removeAllObjects
+{
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self];
+    [array removeAllObjects];
+    return array;
+}
+
 @end
